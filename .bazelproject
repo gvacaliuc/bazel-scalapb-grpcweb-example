@@ -1,0 +1,9 @@
+directories:
+  .
+
+targets:
+  //src/...
+  //protos/...
+
+additional_languages:
+  scala

@@ -1,0 +1,91 @@
+# Specifies dependencies retrieved from Maven that are auto-generated into Bazel build targets
+# See https://github.com/johnynek/bazel-deps
+replacements:
+  org.scala-lang:
+    scala-library:
+      lang: scala/unmangled
+      target: "@io_bazel_rules_scala_scala_library//:io_bazel_rules_scala_scala_library"
+    scala-reflect:
+      lang: scala/unmangled
+      target: "@io_bazel_rules_scala_scala_reflect//:io_bazel_rules_scala_scala_reflect"
+    scala-compiler:
+      lang: scala/unmangled
+      target: "@io_bazel_rules_scala_scala_compiler//:io_bazel_rules_scala_scala_compiler"
+  org.scala-lang.modules:
+    scala-parser-combinators:
+      lang: scala
+      target: "@io_bazel_rules_scala_scala_parser_combinators//:io_bazel_rules_scala_scala_parser_combinators"
+    scala-xml:
+      lang: scala
+      target: "@io_bazel_rules_scala_scala_xml//:io_bazel_rules_scala_scala_xml"
+dependencies:
+  com.google.protobuf:
+    protobuf-java:
+      version: 3.12.2
+      lang: java
+  com.thesamet.scalapb:
+    compilerplugin:
+      version: 0.10.11
+      lang: scala
+    protoc-bridge:
+      version: 0.9.2
+      lang: scala
+    scalapb-runtime:
+      lang: scala
+      version: 0.10.11
+    scalapb-runtime-grpc:
+      lang: scala
+      version: 0.10.11
+    lenses:
+      lang: scala
+      version: 0.10.11
+    scalapb-runtime_sjs1:
+      version: 0.10.11
+      lang: scala
+    lenses_sjs1:
+      version: 0.10.11
+      lang: scala
+  com.thesamet.scalapb.grpcweb:
+    # this library provides the sjsir jars for the generated grpcweb code
+    scalapb-grpcweb_sjs1:
+      version: 0.5.0
+      lang: scala
+    # this library provides the grpcweb code generator
+    scalapb-grpcweb-code-gen:
+      version: 0.5.0
+      lang: scala
+  # to create scala.js web applications
+  org.scala-js:
+    # NOTE:
+    # bazel-deps generates:
+    #     https://repo.maven.apache.org/maven2/org/scala-js/scalajs-compiler_2.12/1.5.0/scalajs-compiler_2.12-1.5.0.pom
+    # we need
+    #     https://repo.maven.apache.org/maven2/org/scala-js/scalajs-compiler_2.12.8/1.5.0/scalajs-compiler_2.12.8-1.5.0.pom
+    #    scalajs-compiler:
+    #      version: 1.5.0
+    #      lang: scala
+    scalajs-library:
+      version: 1.5.0
+      lang: scala
+    scalajs-ir:
+      version: 1.5.0
+      lang: scala
+    scalajs-linker:
+      version: 1.5.0
+      lang: scala
+    scalajs-dom_sjs1:
+      version: 1.1.0
+      lang: scala
+
+options:
+  languages:
+    - java
+    - scala:2.12.8
+  resolverType: "coursier"
+  resolvers:
+    - id: "apache"
+      type: "default"
+      url: "https://repo.maven.apache.org/maven2/"
+  buildHeader:
+    - load("@io_bazel_rules_scala//scala:scala_import.bzl", "scala_import")
+    - load("@io_bazel_rules_scala//scala:scala.bzl", "scala_library")
