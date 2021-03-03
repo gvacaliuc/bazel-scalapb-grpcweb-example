@@ -22,7 +22,7 @@ load("@bazel_skylib//:workspace.bzl", "bazel_skylib_workspace")
 
 bazel_skylib_workspace()
 
-rules_scala_version = "b783736bc4d704eeaaa8876c4574fb638529a024"
+rules_scala_version = "af59dde6c87a8b4b4bd04d44c1f82c594c24c3bd"
 
 http_archive(
     name = "io_bazel_rules_scala",
@@ -31,7 +31,7 @@ http_archive(
     type = "zip",
     url = "https://github.com/ConsultingMD/rules_scala/archive/%s.zip" % rules_scala_version,
 )
-#
+
 #local_repository(
 #    name = "io_bazel_rules_scala",
 #    path = "../../bazelbuild/rules_scala",
@@ -40,9 +40,6 @@ http_archive(
 load("@io_bazel_rules_scala//:version.bzl", "bazel_version")
 
 bazel_version(name = "bazel_version")
-
-#load("@io_bazel_rules_scala//scala:toolchains.bzl", "scala_register_toolchains")
-#scala_register_toolchains()
 
 load("@io_bazel_rules_scala//scala:scala.bzl", "scala_repositories")
 
@@ -66,6 +63,10 @@ scala_proto_repositories(scala_version)
 register_toolchains("//tools/toolchains:scalajs_toolchain")
 
 register_toolchains("//tools/toolchains:scalajs_deps_toolchain")
+
+register_toolchains("//tools/toolchains:scala_proto_toolchain")
+
+register_toolchains("//tools/toolchains:scalajs_proto_toolchain")
 
 load("//3rdparty:workspace.bzl", "maven_dependencies")
 

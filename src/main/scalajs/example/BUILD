@@ -5,7 +5,7 @@ scalajs_library(
     srcs = glob(["*.scala"]),
     deps = [
         "//3rdparty/jvm/org/scala_js:scalajs_dom_sjs1",
-        #        "//protos/src/main/protobuf:my_service_proto_scala",
+        "//protos/src/main/protobuf:my_service_proto_scalajs",
     ],
 )
 
@@ -17,7 +17,5 @@ scalajs_binary(
     method = "init",
     deps = [
         ":sjsir",
-        #        "//3rdparty/jvm/com/thesamet/scalapb:lenses_sjs1",
-        #        "//3rdparty/jvm/com/thesamet/scalapb:scalapb_runtime_sjs1",
     ],
 )

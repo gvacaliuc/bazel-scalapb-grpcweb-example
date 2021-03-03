@@ -3,7 +3,7 @@ package scalajs.example
 import org.scalajs.dom
 import org.scalajs.dom.document
 
-//import scalapb.web.myservice._
+import scalapb.web.myservice._
 
 object TutorialApp {
   def main(args: Array[String]): Unit = {
@@ -12,17 +12,17 @@ object TutorialApp {
 
   def getNames: Seq[String] = Seq("foo", "bar", "baz")
 
-//  def getRequests: Seq[Req] = Seq(
-//    Req().withPayload("foobar").withVals(Seq(1, 2, 3)),
-//    Req().withPayload("foobar").withVals(Seq(1, 2, 3)),
-//    Req().withPayload("foobar").withVals(Seq(1, 2, 3)),
-//    Req().withPayload("foobar").withVals(Seq(1, 2, 3))
-//  )
+  def getRequests: Seq[Req] = Seq(
+    Req().withPayload("foobar").withVals(Seq(1, 2, 3)),
+    Req().withPayload("foobar").withVals(Seq(1, 2, 3)),
+    Req().withPayload("blahblah").withVals(Seq(1, 2, 3)),
+    Req().withPayload("omgomg").withVals(Seq(1, 2, 3))
+  )
 
   def hdrs: Seq[String] = Seq("payload", "vals")
-//  def displayRows(rows: Seq[Req]): Seq[Seq[String]] = rows.map { req =>
-//    Seq(req.payload, "[" + req.vals.mkString(", ") + "]")
-//  }
+  def displayRows(rows: Seq[Req]): Seq[Seq[String]] = rows.map { req =>
+    Seq(req.payload, "[" + req.vals.mkString(", ") + "]")
+  }
 
   def appendTable(targetNode: dom.Node, hdrs: Seq[String], rows: Seq[Seq[String]]): Unit = {
     val table = document.createElement("table")
@@ -58,8 +58,8 @@ object TutorialApp {
     appendTable(
       document.body,
       hdrs,
-      Seq(Seq("foo", "bar"), Seq("foo", "bar"))
-//      displayRows(getRequests)
+//      Seq(Seq("foo", "bar"), Seq("foo", "bar"))
+      displayRows(getRequests)
     )
   }
 }
