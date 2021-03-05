@@ -8,15 +8,24 @@ The server/client code  was lifted from:
 
 1. Build the client js:
 
-   ```
-   bazelisk build //src/main/scalajs/example:index.js
-   ```
+    ```
+    bazelisk build //src/main/scalajs/example:index.js
+    # nvm use --lts
+    npm install
+    npx webpack
+    ```
 
 1. Run the server
 
-   ```
-   bazel something (TODO)
-   ```
+    ```
+    bazelisk run //src/main/scalapb/grpc/example/server:server
+    ```
+
+1. Run the proxy
+
+    ```
+    docker run --rm -ti --net=host -v $PWD/envoy.yaml:/etc/envoy/envoy.yaml envoyproxy/envoy:v1.17.0
+    ```
 
 1. Open the `index.html` file from this directory in your browser.
 

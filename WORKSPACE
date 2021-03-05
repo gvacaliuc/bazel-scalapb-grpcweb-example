@@ -24,18 +24,18 @@ bazel_skylib_workspace()
 
 rules_scala_version = "af59dde6c87a8b4b4bd04d44c1f82c594c24c3bd"
 
-http_archive(
-    name = "io_bazel_rules_scala",
-    sha256 = "",
-    strip_prefix = "rules_scala-%s" % rules_scala_version,
-    type = "zip",
-    url = "https://github.com/ConsultingMD/rules_scala/archive/%s.zip" % rules_scala_version,
-)
-
-#local_repository(
+#http_archive(
 #    name = "io_bazel_rules_scala",
-#    path = "../../bazelbuild/rules_scala",
+#    sha256 = "",
+#    strip_prefix = "rules_scala-%s" % rules_scala_version,
+#    type = "zip",
+#    url = "https://github.com/ConsultingMD/rules_scala/archive/%s.zip" % rules_scala_version,
 #)
+
+local_repository(
+    name = "io_bazel_rules_scala",
+    path = "../../bazelbuild/rules_scala",
+)
 
 load("@io_bazel_rules_scala//:version.bzl", "bazel_version")
 

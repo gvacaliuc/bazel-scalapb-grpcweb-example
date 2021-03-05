@@ -6,6 +6,8 @@ import scalapb.grpcweb.Metadata
 import scalapb.web.myservice.TestServiceGrpcWeb
 import scalapb.web.myservice.{Req, Res}
 import scala.concurrent.ExecutionContext.Implicits.global
+import org.scalajs.dom
+import org.scalajs.dom.document
 
 class GrpcError(code: String, message: String)
     extends RuntimeException(s"Grpc-web error ${code}: ${message}")
@@ -13,6 +15,12 @@ class GrpcError(code: String, message: String)
 object Client {
   def init: Unit = {
     main(Array.empty)
+  }
+
+  def appendPar(targetNode: dom.Node, text: String): Unit = {
+    val parNode = document.createElement("p")
+    parNode.textContent = text
+    targetNode.appendChild(parNode)
   }
 
   def main(args: Array[String]): Unit = {
@@ -26,31 +34,29 @@ object Client {
 
     val metadata: Metadata = Metadata("custom-header-1" -> "unary-value")
     // Make an async unary call
-    stub.unary(req).onComplete { f =>
+    stub.unary(req.update(_.payload := "Hello, World!")).onComplete { f =>
       println("Unary", f)
     }
 
     // Make an async unary call with metadata
-    stub.unary(req, metadata).onComplete { f =>
+    stub.unary(req.update(_.payload := ""), metadata).onComplete { f =>
       println("Unary", f)
     }
-    val metadata2: Metadata = Metadata("custom-header-2" -> "streaming-value")
+//    val metadata2: Metadata = Metadata("custom-header-2" -> "streaming-value")
 
     // Make an async server streaming call
     val stream = stub.serverStreaming(
-      req,
-      metadata2,
+      req.update(_.payload := "WOWOWOWOWOWOWOWOWOWOWOWOW"),
+      metadata,
       new StreamObserver[Res] {
-        override def onNext(value: Res): Unit = {
-          println("Next: " + value)
-        }
+        override def onNext(value: Res): Unit = { throw new RuntimeException() }
 
         override def onError(throwable: Throwable): Unit = {
-          println("Error! " + throwable)
+          println(s"error: $throwable")
         }
 
         override def onCompleted(): Unit = {
-          println("Completed!")
+          appendPar(document.body, "Stream Completed!")
         }
       }
     )

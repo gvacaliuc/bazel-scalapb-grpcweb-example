@@ -30,6 +30,46 @@ java_library(
 
 
 java_library(
+    name = "grpc_core",
+    exports = [
+        "//3rdparty/jvm/com/google/android:annotations",
+        "//3rdparty/jvm/com/google/code/findbugs:jsr305",
+        "//3rdparty/jvm/com/google/code/gson:gson",
+        "//3rdparty/jvm/com/google/errorprone:error_prone_annotations",
+        "//3rdparty/jvm/com/google/guava:guava",
+        "//3rdparty/jvm/io/perfmark:perfmark_api",
+        "//3rdparty/jvm/org/codehaus/mojo:animal_sniffer_annotations",
+        "//external:jar/io/grpc/grpc_core",
+        ":grpc_api"
+    ],
+    visibility = [
+        "//3rdparty/jvm:__subpackages__"
+    ]
+)
+
+
+
+java_library(
+    name = "grpc_netty",
+    exports = [
+        "//3rdparty/jvm/com/google/code/findbugs:jsr305",
+        "//3rdparty/jvm/com/google/errorprone:error_prone_annotations",
+        "//3rdparty/jvm/com/google/guava:guava",
+        "//3rdparty/jvm/io/netty:netty_codec_http2",
+        "//3rdparty/jvm/io/netty:netty_handler_proxy",
+        "//3rdparty/jvm/io/perfmark:perfmark_api",
+        "//3rdparty/jvm/org/codehaus/mojo:animal_sniffer_annotations",
+        "//external:jar/io/grpc/grpc_netty",
+        ":grpc_core"
+    ],
+    visibility = [
+        "//visibility:public"
+    ]
+)
+
+
+
+java_library(
     name = "grpc_protobuf",
     exports = [
         "//3rdparty/jvm/com/google/api/grpc:proto_google_common_protos",
@@ -43,7 +83,7 @@ java_library(
         ":grpc_protobuf_lite"
     ],
     visibility = [
-        "//3rdparty/jvm:__subpackages__"
+        "//visibility:public"
     ]
 )
 
@@ -77,7 +117,7 @@ java_library(
         ":grpc_api"
     ],
     visibility = [
-        "//3rdparty/jvm:__subpackages__"
+        "//visibility:public"
     ]
 )
 
